@@ -11,5 +11,12 @@ package recipient;
 public class Recipient {
     protected String name;
     protected String email;
+    public static int recipientCount;
+
+    public Recipient(String name, String email){
+        this.name = name;
+        this.email = email;
+        recipientCount++;
+    }
 }
 
