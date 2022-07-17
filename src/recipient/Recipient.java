@@ -18,5 +18,7 @@ public class Recipient {
         this.email = email;
         recipientCount++;
     }
+
+    public String getMail(){   return email;}
 }
 
