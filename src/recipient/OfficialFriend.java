@@ -1,4 +1,6 @@
 package recipient;
+import connect.Email;
+import user.User;
 
 class OfficialFriend extends Recipient implements Greetable{
     private String bday;
@@ -12,8 +14,18 @@ class OfficialFriend extends Recipient implements Greetable{
 
 
     @Override
-    public void greet() {
-        // Logic to sent the greeting mail.
+    public void greet(User user) {
+        try {
+            Email email = Email.connectEmail(user);
+            String content = "Wish you a Happy Birthday.\n"+user.getName();
+            String subject = "Happy Birthday";
+
+            email.sendMail(this, subject, content);
+        } catch (Exception e) {
+            System.err.println("Error : Could not send greeting mail to office friend");
+            e.printStackTrace();
+        }
+
     }
 }
 
