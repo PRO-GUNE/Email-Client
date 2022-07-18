@@ -15,6 +15,7 @@ public class MailService implements Serializable{
     private String password;
     private Session session;
 
+    
     private MailService(User user){
         this.email = user.getEmail();
         this.password = user.getPassword();
@@ -25,16 +26,19 @@ public class MailService implements Serializable{
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true");
-
+        
         Session session = Session.getInstance(prop,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(email, password);
-                    }
-                });
+        new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(email, password);
+            }
+        });
         this.session = session;
     }
-
+    
+    public Session getSession() {
+        return session;
+    }
     public static MailService connectMailService(User user){
         if(mailService==null){
             mailService = new MailService(user);
