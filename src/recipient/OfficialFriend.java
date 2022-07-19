@@ -1,21 +1,32 @@
 package recipient;
-import user.User;
 
-class OfficialFriend extends Recipient implements Greetable{
-    private String bday;
-    private String title;
+import connect.Email;
 
-    public OfficialFriend(String name, String email, String title, String bday) {
-        super(name, email);
-        this.bday = bday;
-        this.title = title;
+public class OfficialFriend extends Official implements Greetable{
+    
+    public OfficialFriend(String name, String email, String title, String bDay) {
+        super(name, email, title);
+        this.bDay = bDay;
+        this.type = "Official_friend";
     }
 
-
+    
     @Override
-    public void greet(User user) {
-        String content = "Wish you a Happy Birthday.\n"+user.getName();
-        String subject = "Happy Birthday";
+    public Email formatMail(String subject, String content) {
+        String sendContent = String.format("Dear %s,\n%s\n", this.title, content);
+        Email mail = new Email(subject, sendContent, this);
+        return mail;
     }
+    
+    @Override
+    public Email greet() {
+        String content = "Wish you a Happy Birthday.\n";
+        String subject = "Happy Birthday";
+
+        Email mail = new Email(subject, content, this);
+        return mail;
+    }
+    
+    
 }
 

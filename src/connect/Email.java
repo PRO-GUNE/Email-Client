@@ -2,6 +2,8 @@ package connect;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import recipient.Recipient;
 
 public class Email implements Serializable{
@@ -9,7 +11,7 @@ public class Email implements Serializable{
     private String subject;
     private String content;
     private Recipient recipient;
-    
+    private static ArrayList<Email> sentMails= new ArrayList<Email>();
 
     
     public Email(String subject, String content, Recipient recipient) {
@@ -29,6 +31,23 @@ public class Email implements Serializable{
         
         return null;
     }
+
+    public void writeSentMails(){
+        MailWriter mailWriter = MailWriter.connectWriter();
+        if(mailWriter != null){
+            mailWriter.writeMail(sentMails);
+            mailWriter.disconnectWriter();
+        }
+    }
+
+    public void loadSentMails(){
+        MailReader mailReader = MailReader.connectReader();
+        if(mailReader != null){
+            sentMails = mailReader.readMail();
+            mailReader.disconnectReader();
+        }
+    }
+
     public String getContent() {
         return content;
     }

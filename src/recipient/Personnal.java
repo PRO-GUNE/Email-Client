@@ -1,20 +1,35 @@
 package recipient;
-import user.User;
 
-class Personnal extends Recipient implements Greetable{
-    private String nickname;
-    private String bday;
-    
-    public Personnal(String name, String nickname, String email, String bday) {
+import connect.Email;
+
+public class Personnal extends Recipient implements Greetable{
+    public Personnal(String name, String nickname, String email, String bDay) {
         super(name, email);
-        this.nickname = nickname;
-        this.bday = bday;
+        this.nickName = nickname;
+        this.bDay = bDay;
+        this.type = "Personnal";
     }
 
     @Override
-    public void greet(User user) {
-        String content = "Hugs and love on your birthday.\n"+user.getName();
+    public Email greet() {
+        String content = "Hugs and love on your birthday.\n";
         String subject = "Happy Birthday";
+        Email mail = new Email(subject, content, this);
+        return mail;
+    }
+
+    @Override
+    public Email formatMail(String subject, String content) {
+        String sendContent = String.format("Dear %s,\n%s\n", this.nickName, content);
+        Email mail = new Email(subject, sendContent, this);
+        return mail;
+        
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s: %s,%s,%s,%s", type, name, nickName, email, bDay);
 
     }
+
 }

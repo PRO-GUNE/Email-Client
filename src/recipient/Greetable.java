@@ -1,6 +1,12 @@
 package recipient;
-import user.User;
+
+import connect.Email;
 
 public interface Greetable {
-    public void greet(User user);
+    public Email greet();
+
+    public static boolean isSameDates(String date1, String date2){
+        return (date1.substring(3, date1.length()-1) == 
+                    date2.substring(3, date2.length()-1));
+    };
 }

@@ -1,18 +1,69 @@
 package recipient;
 
-import util.MailAddress;
+import java.util.ArrayList;
+
+import connect.DatabaseReader;
+import connect.DatabaseWriter;
 
 public class RecipientFactory {
-    // Overloaded functions to create appropriate recipient
-    public Recipient makeRecipient(String name,MailAddress email,String title){
-        return new Official(name, email.getAddress(), title);
-    };
-
-    public Recipient makeRecipient(String name,MailAddress email,String title,String bday){
-        return new OfficialFriend(name, email.getAddress(), title, bday);
+    private ArrayList<Recipient> recipients;
+    
+    public RecipientFactory(){
+        this.recipients = new ArrayList<Recipient>();
     }
 
-    public Recipient makeRecipient(String name,String nickname,MailAddress email,String bday){
-        return new Personnal(name, nickname, email.getAddress(), bday);
+    public Recipient makeRecipient(String recipientString){
+        Recipient recipient = Recipient.parseRecipientFromString(recipientString);
+        this.recipients.add(recipient);
+        return recipient;
+    }
+
+    public Recipient getRecipientByEmail(String email){
+        for(Recipient recipient : recipients){
+            if(recipient.getMail().equals(email))
+                return recipient;
+        }
+
+        return null;
+    }
+
+    public ArrayList<Recipient> getRecipientByDate(String date){
+        // Only greetable recipients have birthdays
+        ArrayList<Recipient> bdayRecipients = new ArrayList<Recipient>();
+        
+        for(Recipient recipient : recipients){
+            if(recipient instanceof Greetable && 
+                Greetable.isSameDates(recipient.getbDay(), date)){
+                    bdayRecipients.add(recipient);
+                }
+        }
+        
+        return bdayRecipients;
+    }
+
+    public int getNumRecipients(){
+        return recipients.size();
+    }
+
+    public void loadRecipients(){
+        DatabaseReader databaseReader = DatabaseReader.connectDBReader();
+        if(databaseReader != null){
+            recipients = databaseReader.readRecipients();
+            databaseReader.closeDBReader();
+        }
+    }
+    
+    public void writeRecipients(){
+        DatabaseWriter databaseWriter = DatabaseWriter.connectDBWriter();
+        if(databaseWriter != null){
+            databaseWriter.writeRecipient(recipients);
+            databaseWriter.closeDBWriter();
+        }
+    }
+
+    public void printRecipients(){
+        for(Recipient rec : recipients){
+            System.out.println(rec.toString());
+        }
     }
 }

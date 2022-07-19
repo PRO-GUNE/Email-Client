@@ -1,22 +1,20 @@
 package connect;
-import java.io.Serializable;
-import java.util.Properties;
 
+import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
 import recipient.Recipient;
-import user.User;
-
-public class MailService implements Serializable{
+public class MailService{
     // This is a singleton object that connects to the Email Service
     private static MailService mailService;
+    private static final User user = new User("Chathura", "cmggun567@gmail.com", "uzxlvgylnicxseyn");
     private String email;
     private String password;
     private Session session;
 
     
-    private MailService(User user){
+    private MailService(){
         this.email = user.getEmail();
         this.password = user.getPassword();
 
@@ -36,22 +34,20 @@ public class MailService implements Serializable{
         this.session = session;
     }
     
-    public Session getSession() {
-        return session;
-    }
-    public static MailService connectMailService(User user){
+    public static MailService connectMailService(){
         if(mailService==null){
-            mailService = new MailService(user);
+            mailService = new MailService();
         }
         return mailService;
     }
 
-    public void sendMail(Email mail){
+    public void sendMail(Recipient recipient, String subjectString, String contentString){
         // Set up sender
         Message message = new MimeMessage(session);
-        Recipient recipient = mail.getRecipient();
+        Email mail = recipient.formatMail(subjectString, contentString);
+
         String subject = mail.getSubject();
-        String content = mail.getContent();
+        String content = mail.getContent() + user.getName();
         try {
             // Create the message
             message.setFrom(new InternetAddress(email));
@@ -72,4 +68,29 @@ public class MailService implements Serializable{
             e.printStackTrace();
         }
     }
+}
+class User {
+    private String email;
+    private String password;
+    private String name;
+    
+    
+    public User(String name, String email, String password) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
 }

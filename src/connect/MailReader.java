@@ -3,15 +3,18 @@ package connect;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 public class MailReader {
     private static MailReader mailReader;
     private FileInputStream fileInputStream;
     private ObjectInputStream objectInputStream;
+    private static final String filePath = "G:\\University\\Semester_02\\CS\\CS 1040\\Code Snippets\\Assessments\\4_EmailClient\\Code\\Email Client\\data\\emailList.txt";
+
 
     private MailReader(){
         try {
-            this.fileInputStream = new FileInputStream("./emailHistory.ser");
+            this.fileInputStream = new FileInputStream(filePath);
             this.objectInputStream = new ObjectInputStream(this.fileInputStream);
         } catch (IOException e) {
             System.err.println("Error : Could not connect to the logger file");
@@ -37,10 +40,15 @@ public class MailReader {
         }
     }
 
-    public Email readMail(){
-        Email email = null;
+    public ArrayList<Email> readMail(){
+        ArrayList<Email> emails = new ArrayList<Email>();
         try {
-            email = (Email) this.objectInputStream.readObject();
+            Object obj = this.objectInputStream.readObject();
+            ArrayList<?> ar = (ArrayList<?>) obj;
+
+            for(Object mail : ar)
+                emails.add((Email) mail);
+                
         } catch (ClassNotFoundException e) {
             System.err.println("Error : Could not find the class Email");
             e.printStackTrace();
@@ -48,7 +56,7 @@ public class MailReader {
             System.err.println("Error : Could not read from the log file");
             e.printStackTrace();
         }
-        return email;
+        return emails;
     }
 
 }

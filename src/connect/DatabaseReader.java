@@ -1,22 +1,26 @@
 package connect;
 
+import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import recipient.Recipient;
 
 public class DatabaseReader {
     private static DatabaseReader databaseReader;
-    private ObjectInputStream objectInputStream;
-    private FileInputStream fileInputStream;
-
+    private Scanner scanner;
+    private static final String filePath = "G:\\University\\Semester_02\\CS\\CS 1040\\Code Snippets\\Assessments\\4_EmailClient\\Code\\Email Client\\data\\clientList.txt";
+    
     private DatabaseReader(){
         try {
-            this.fileInputStream = new FileInputStream("./clientList.ser");
-            this.objectInputStream = new ObjectInputStream(this.fileInputStream);
-        } catch (IOException e) {
-            System.err.println("Error : Could not create file write connection");
+            this.scanner = new Scanner(new File(filePath));
+        } catch (FileNotFoundException e) {
+            System.err.println("Error : Could not open the file");
             e.printStackTrace();
         }
     }
@@ -29,27 +33,19 @@ public class DatabaseReader {
     }
 
     public void closeDBReader(){
-        try {
-            this.fileInputStream.close();
-            this.objectInputStream.close();
-            databaseReader = null;
-        } catch (IOException e) {
-            System.err.println("Error : Could not close database write connection successfully");
-            e.printStackTrace();
-        }
+        this.scanner.close();
+        databaseReader = null;
+
     }
 
-    public Recipient readRecipient(){
-        Recipient recipient = null;
-        try {
-            recipient = (Recipient) this.objectInputStream.readObject();
-        } catch (ClassNotFoundException e) {
-            System.err.println("Error : Could not find the class recipient");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.err.println("Error : Could not read from the database");
-            e.printStackTrace();
+    public ArrayList<Recipient> readRecipients(){
+        ArrayList<Recipient> recipients = new ArrayList<Recipient>();
+        while (scanner.hasNextLine()) {
+            recipients.add(Recipient.parseRecipientFromString(scanner.nextLine()));
+            System.out.println(scanner.nextLine());
         }
-        return recipient;
+        scanner.close();
+    
+        return recipients;
     }
 }
