@@ -1,7 +1,5 @@
 package connect_test;
 
-import javax.mail.internet.MimeMessage;
-
 import org.junit.Assert;
 import org.junit.Test;
 
