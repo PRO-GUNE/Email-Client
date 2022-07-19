@@ -1,10 +1,12 @@
 package connect;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+import recipient.Greetable;
 import recipient.Recipient;
 
 public class MailService{
@@ -45,6 +47,20 @@ public class MailService{
             mailService = new MailService();
         }
         return mailService;
+    }
+
+    public void sendGreeting(ArrayList<Recipient> recipients){
+        
+        String today = LocalDate.now().toString();
+        
+        for(Recipient recipient : recipients){
+            if(recipient instanceof Greetable && 
+                today.equalsIgnoreCase(recipient.getbDay())){
+                Greetable greetable = (Greetable)recipient;
+                Email mail = greetable.greet();
+                sendMail(recipient, mail.getSubject(), mail.getContent());
+            }
+        }
     }
 
     public void sendMail(Recipient recipient, String subjectString, String contentString){
