@@ -9,7 +9,7 @@ public class MailWriter {
     private static MailWriter mailWriter;
     private FileOutputStream fileOutputStream;
     private ObjectOutputStream objectOutputStream;
-    private static final String filePath = "G:\\University\\Semester_02\\CS\\CS 1040\\Code Snippets\\Assessments\\4_EmailClient\\Code\\Email Client\\data\\emailList.txt";
+    private static final String filePath = "G:\\University\\Semester_02\\CS\\CS 1040\\Code Snippets\\Assessments\\4_EmailClient\\Code\\Email Client\\data\\emailHistory.txt";
 
 
     private MailWriter(){

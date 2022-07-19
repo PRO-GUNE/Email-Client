@@ -14,7 +14,7 @@ public class RecipientFactory {
 
     public Recipient makeRecipient(String recipientString){
         Recipient recipient = Recipient.parseRecipientFromString(recipientString);
-        this.recipients.add(recipient);
+        recipients.add(recipient);
         return recipient;
     }
 
@@ -56,7 +56,7 @@ public class RecipientFactory {
     public void writeRecipients(){
         DatabaseWriter databaseWriter = DatabaseWriter.connectDBWriter();
         if(databaseWriter != null){
-            databaseWriter.writeRecipient(recipients);
+            databaseWriter.writeRecipients(recipients);
             databaseWriter.closeDBWriter();
         }
     }

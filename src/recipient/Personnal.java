@@ -28,7 +28,7 @@ public class Personnal extends Recipient implements Greetable{
 
     @Override
     public String toString() {
-        return String.format("%s: %s,%s,%s,%s", type, name, nickName, email, bDay);
+        return String.format("%s: %s,%s,%s,%s\n", type, name, nickName, email, bDay);
 
     }
 

@@ -10,6 +10,7 @@ public class Official extends Recipient{
         this.type = "Official";
     }
     
+    @Override
     public Email formatMail(String subject, String content){
         String sendContent = String.format("Dear %s,\n%s\n", this.title, content);
         Email mail = new Email(subject, sendContent, this);
@@ -18,7 +19,7 @@ public class Official extends Recipient{
 
     @Override
     public String toString() {
-        return String.format("%s: %s,%s,%s", type, name, email, title);
+        return String.format("%s: %s,%s,%s\n", type, name, email, title);
     }
     
 

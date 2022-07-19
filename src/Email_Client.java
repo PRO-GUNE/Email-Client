@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import connect.Email;
+import connect.MailService;
 import recipient.Recipient;
 import recipient.RecipientFactory;
 
@@ -15,8 +17,10 @@ public class Email_Client {
         // load the current recipients
         recipientFactory.loadRecipients();
 
-        // Create the email history
-        // Load the email history
+        // Create the mail service
+        MailService mailService = MailService.connectMailService();
+        // Load mail history
+        mailService.loadSentMails();
 
         // Create an instance of Recipient
         Recipient recipient = null;
@@ -37,18 +41,17 @@ public class Email_Client {
                 String recipientString = scanner.nextLine();
                 // Create the recipient
                 recipient = recipientFactory.makeRecipient(recipientString);
-                System.out.println(recipient.toString());
                 break;
             case 2:
                     // input format - email,subject,content
                     String[] emailString = scanner.nextLine().split(",", 3);
                     String email = emailString[0];
-                    String subject = emailString[1];
-                    String content = emailString[2];
+                    String subjectString = emailString[1];
+                    String contentString = emailString[2];
 
                     // code to send an email
                     recipient = recipientFactory.getRecipientByEmail(email);
-                    recipient.formatMail(subject, content);
+                    mailService.sendMail(recipient, subjectString, contentString);
                     break;
                 case 3:
                     // input format - yyyy/MM/dd (ex: 2018/09/17)
@@ -62,7 +65,12 @@ public class Email_Client {
                     break;
                 case 4:
                     // input format - yyyy/MM/dd (ex: 2018/09/17)
-                    // code to print the details of all the emails sent on the input date
+                    String searchDate = scanner.nextLine();
+                    // Get the filtered mail
+                    ArrayList<Email> filteredMails = mailService.filterMailByDate(searchDate);
+                    for(Email mail : filteredMails)
+                        System.out.println(mail.toString());
+                    
                     break;
                 case 5:
                     // code to print the number of recipient objects in the application
@@ -74,8 +82,17 @@ public class Email_Client {
           // start email client
           // code to create objects for each recipient in clientList.txt
           // use necessary variables, methods and classes
-          recipientFactory.printRecipients();
+          mailService.writeSentMails();
           recipientFactory.writeRecipients();
+
+          // Sent mails
+          System.out.println("Sent Mails - ");
+          mailService.printSentMails();
+
+          // Recipients
+          System.out.println("Current recipients");
+          recipientFactory.printRecipients();
+
           scanner.close();
       }
 }

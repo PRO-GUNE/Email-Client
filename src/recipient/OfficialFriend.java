@@ -26,6 +26,11 @@ public class OfficialFriend extends Official implements Greetable{
         Email mail = new Email(subject, content, this);
         return mail;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s: %s,%s,%s,%s\n", type, name, email, title, bDay);
+    }
     
     
 }

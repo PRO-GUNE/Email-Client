@@ -1,5 +1,6 @@
 package connect;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,17 +10,25 @@ public class MailReader {
     private static MailReader mailReader;
     private FileInputStream fileInputStream;
     private ObjectInputStream objectInputStream;
-    private static final String filePath = "G:\\University\\Semester_02\\CS\\CS 1040\\Code Snippets\\Assessments\\4_EmailClient\\Code\\Email Client\\data\\emailList.txt";
+    private static final String filePath = "G:\\University\\Semester_02\\CS\\CS 1040\\Code Snippets\\Assessments\\4_EmailClient\\Code\\Email Client\\data\\emailHistory.txt";
 
 
     private MailReader(){
         try {
             this.fileInputStream = new FileInputStream(filePath);
             this.objectInputStream = new ObjectInputStream(this.fileInputStream);
-        } catch (IOException e) {
+        } catch(EOFException e){
+            System.err.println("Warning : The history file is empty");
+            return;
+        } 
+        catch (IOException e) {
             System.err.println("Error : Could not connect to the logger file");
             e.printStackTrace();
         }
+    }
+
+    public boolean isNotNull(){
+        return (mailReader.objectInputStream!=null);
     }
 
     public static MailReader connectReader(){

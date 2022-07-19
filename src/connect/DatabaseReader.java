@@ -1,11 +1,7 @@
 package connect;
 
-import java.io.EOFException;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,7 +29,7 @@ public class DatabaseReader {
     }
 
     public void closeDBReader(){
-        this.scanner.close();
+        scanner.close();
         databaseReader = null;
 
     }
@@ -42,9 +38,7 @@ public class DatabaseReader {
         ArrayList<Recipient> recipients = new ArrayList<Recipient>();
         while (scanner.hasNextLine()) {
             recipients.add(Recipient.parseRecipientFromString(scanner.nextLine()));
-            System.out.println(scanner.nextLine());
         }
-        scanner.close();
     
         return recipients;
     }
