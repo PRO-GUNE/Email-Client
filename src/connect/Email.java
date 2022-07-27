@@ -1,20 +1,23 @@
 package connect;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import recipient.Recipient;
 
 public class Email implements Serializable{
-    private LocalDate timeStamp;
+    private String timeStamp;
     
     private String subject;
     private String content;
     private String recipient;
+    private static final long serialversionUID = 129348938L;
     
     
     public Email(String subject, String content, Recipient recipient) {
-        this.timeStamp = LocalDate.now();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        this.timeStamp = formatter.format(new Date());
         this.subject = subject;
         this.content = content;
         this.recipient = recipient.toString();
@@ -24,7 +27,7 @@ public class Email implements Serializable{
         return String.format("Subject: %s \t To: %s", this.subject, this.recipient);
     }
     
-    public String filterByDate(LocalDate date){
+    public String filterByDate(String date){
         if(this.timeStamp.equals(date))
         return this.parseToString();
         

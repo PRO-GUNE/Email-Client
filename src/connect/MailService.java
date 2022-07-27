@@ -1,6 +1,5 @@
 package connect;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.mail.*;
@@ -50,16 +49,10 @@ public class MailService{
     }
 
     public void sendGreeting(ArrayList<Recipient> recipients){
-        
-        String today = LocalDate.now().toString();
-        
         for(Recipient recipient : recipients){
-            if(recipient instanceof Greetable && 
-                today.equalsIgnoreCase(recipient.getbDay())){
                 Greetable greetable = (Greetable)recipient;
                 Email mail = greetable.greet();
                 sendMail(recipient, mail.getSubject(), mail.getContent());
-            }
         }
     }
 
@@ -91,7 +84,7 @@ public class MailService{
         } catch (MessagingException e) {
             System.err.println("Error : Could not send the message successfully");
             // Retry connecting to the mail server
-            System.out.println("Retrying to reconnect");
+            System.out.println("Trying to reconnect");
             connectMailService();
             e.printStackTrace();
         }
