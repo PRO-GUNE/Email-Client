@@ -70,33 +70,33 @@ public class Email_Client {
                         recipient = recipientFactory.getRecipientByEmail(email);
                         mailService.sendMail(recipient, subjectString, contentString);
                         break;
-                    case 3:
-                        // input format - yyyy/MM/dd (ex: 2018/09/17)
-                        date = scanner.nextLine();
-                        
-                        // code to print recipients who have birthdays on the given date
-                        ArrayList<Recipient> bDayRecipients = recipientFactory.getRecipientByDate(date);
-                        for(Recipient rec : bDayRecipients){
-                            System.out.println(rec.toString());
-                        } 
-                        break;
-                    case 4:
-                        // input format - yyyy/MM/dd (ex: 2018/09/17)
-                        String searchDate = scanner.nextLine();
-                        // Get the filtered mail
-                        ArrayList<Email> filteredMails = mailService.filterMailByDate(searchDate);
-                        for(Email mail : filteredMails)
-                            System.out.println(mail.toString());
-                        
-                        break;
-                    case 5:
-                        // code to print the number of recipient objects in the application
-                        System.out.println(recipientFactory.getNumRecipients());
-                        break;
+                case 3:
+                    // input format - yyyy/MM/dd (ex: 2018/09/17)
+                    date = scanner.nextLine();
                     
-                    default:
-                        isRunning=false;
-                        break;
+                    // code to print recipients who have birthdays on the given date
+                    ArrayList<Recipient> bDayRecipients = recipientFactory.getRecipientByDate(date);
+                    for(Recipient rec : bDayRecipients){
+                        System.out.println(rec.toString());
+                    } 
+                    break;
+                case 4:
+                    // input format - yyyy/MM/dd (ex: 2018/09/17)
+                    String searchDate = scanner.nextLine();
+                    // Get the filtered mail
+                    ArrayList<Email> filteredMails = mailService.filterMailByDate(searchDate);
+                    for(Email mail : filteredMails)
+                        System.out.println(mail.toString());
+                    
+                    break;
+                case 5:
+                    // code to print the number of recipient objects in the application
+                    System.out.println(recipientFactory.getNumRecipients());
+                    break;
+                
+                default:
+                    isRunning=false;
+                    break;
     
               }
               // start email client
