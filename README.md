@@ -9,7 +9,7 @@ This CLI application allows users to send emails to **Official** and **Personal*
 1. Fork and clone this GIT Repository
 2. Download the zipped folder of this repository and extract it on your local computer
 
-### 🔍 Key Features
+## 🔍 Key Features
 - Add user contacts as Official, Official Friend and Personnal
 - Send emails to any contact. The structure of the email will be adjusted automatically according to the type of the contact.
 - Automatically send birthday wishes to personal contacts and official friends.
