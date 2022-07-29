@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/PRO-GUNE/Email-Client/blob/66ee154e2ac4196e5f3fdf9decc55e7899a72026/%F0%9F%93%A7Email_Client.png" alt="Emaill Client Banner"/>
+</p>
+
 ## 🧐 Project Description
 This CLI application allows users to send emails to **Official** and **Personal** users. The application also stores details of all the sent mail and all the saved contacts of the users. The application automatically sends Birthday wishes to personal contacts on their birthdays.
 
