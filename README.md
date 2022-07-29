@@ -22,8 +22,8 @@ Enter your **email** and **app password** for the mail client app in the `MailSe
 Run the `Email_Client.java` file and this will open the CLI interface. The available options will be displayed in the CLI interface
 
 ## 🧪 Versions
-**v1.0** - This version is a CLI tool only meeting the minimum user requirements specified by the user.
-**v1.1** - This version will have a GUI to interact with the application
+- **v1.0** - This version is a CLI tool only meeting the minimum user requirements specified by the user.
+- **v1.1** - This version will have a GUI to interact with the application
 
 ## 👨‍💻 Contributions
 Chathura Gunasekara @PRO-GUNE
