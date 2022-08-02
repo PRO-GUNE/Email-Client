@@ -2,12 +2,12 @@ package recipient;
 
 import connect.Email;
 
-public class Personnal extends Recipient implements Greetable{
-    public Personnal(String name, String nickname, String email, String bDay) {
+public class Personal extends Recipient implements Greetable{
+    public Personal(String name, String nickname, String email, String bDay) {
         super(name, email);
         this.nickName = nickname;
         this.bDay = bDay;
-        this.type = "Personnal";
+        this.type = "Personal";
     }
 
     @Override

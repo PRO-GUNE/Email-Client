@@ -1,5 +1,6 @@
 package connect;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -9,7 +10,7 @@ public class MailWriter {
     private static MailWriter mailWriter;
     private FileOutputStream fileOutputStream;
     private ObjectOutputStream objectOutputStream;
-    private static final String filePath = "G:\\University\\Semester_02\\CS\\CS 1040\\Code Snippets\\Assessments\\4_EmailClient\\Code\\Email Client\\data\\emailHistory.txt";
+    private static final String filePath = ".\\data\\emailHistory.ser";
 
 
     private MailWriter(){
@@ -48,6 +49,18 @@ public class MailWriter {
             e.printStackTrace();
         }
 
+    }
+
+    public static void createFileIfNotAvailable(){
+        File file = new File(filePath);
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.err.println("Error : Could not create the emailHistory.ser file");
+                e.printStackTrace();
+            }
+        }
     }
 
 }

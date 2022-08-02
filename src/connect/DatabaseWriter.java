@@ -1,5 +1,6 @@
 package connect;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import recipient.Recipient;
 public class DatabaseWriter {
     private static DatabaseWriter databaseWriter;
     private FileWriter fileWriter;
-    private static final String filePath = "G:\\University\\Semester_02\\CS\\CS 1040\\Code Snippets\\Assessments\\4_EmailClient\\Code\\Email Client\\data\\clientList.txt";
+    private static final String filePath = ".\\data\\clientList.txt";
     
     private DatabaseWriter(){
         try {
@@ -44,6 +45,18 @@ public class DatabaseWriter {
                 fileWriter.write(rec.toString());
             } catch (IOException e) {
                 System.err.println("Error : Could not write to the file");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void createFileIfNotAvailable(){
+        File file = new File(filePath);
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.err.println("Error : Could not create the clientList.txt file");
                 e.printStackTrace();
             }
         }

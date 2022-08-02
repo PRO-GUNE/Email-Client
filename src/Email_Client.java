@@ -14,6 +14,7 @@ import recipient.RecipientFactory;
 
 public class Email_Client {
     private static boolean isRunning;
+
     public static void main(String[] args) {
         // Set the email client to running mode
         isRunning = true;
@@ -99,18 +100,14 @@ public class Email_Client {
                     break;
     
               }
-              // start email client
-              // code to create objects for each recipient in clientList.txt
-              // use necessary variables, methods and classes
-              mailService.writeSentMails();
-              recipientFactory.writeRecipients();
-      
             }
+        
+        // Save the sent emails and the recipients to the local data files
+        mailService.writeSentMails();
+        recipientFactory.writeRecipients();
 
         // Close the scanner connection 
         scanner.close();
 
       }
 }
-
-// create more classes needed for the implementation (remove the  public access modifier from classes when you submit your code)

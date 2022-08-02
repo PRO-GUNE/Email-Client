@@ -10,6 +10,9 @@ public class RecipientFactory {
     
     public RecipientFactory(){
         this.recipients = new ArrayList<Recipient>();
+
+        // Create the file to store the recipients if it is not availble
+        DatabaseWriter.createFileIfNotAvailable();
     }
 
     public Recipient makeRecipient(String recipientString){

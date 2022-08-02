@@ -1,5 +1,8 @@
 package connect;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.mail.*;
@@ -11,9 +14,7 @@ import recipient.Recipient;
 public class MailService{
     // This is a singleton object that connects to the Email Service
     private static MailService mailService;
-    private static final User user = new User("Chathura", 
-                                            "cmggun567@gmail.com", 
-                                            "uzxlvgylnicxseyn");
+    private User user;
     private String email;
     private String password;
     private Session session;
@@ -21,10 +22,33 @@ public class MailService{
 
     
     private MailService(){
+        // Create the file to save send emails if it is not available
+        MailWriter.createFileIfNotAvailable();
+
+        // Read the user email and password from the properties file
+        try {
+            InputStream input = new FileInputStream(".\\config\\config.properties");
+            Properties userProp = new Properties();
+            // load a properties file
+            userProp.load(input);
+    
+            // get the property value and print it out
+            String name = userProp.getProperty("user.name");
+            String email = userProp.getProperty("user.email");
+            String password = userProp.getProperty("user.password");
+
+            // Create the user object
+            this.user = new User(name, email, password);
+
+        } catch (IOException e) {
+    
+            System.err.println("Error : Could read data from the properties file");
+        }
+        
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.sentMails = new ArrayList<Email>();
-
+        
         // Create mailService connection
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -144,6 +168,5 @@ class User {
     
     public String getName() {
         return name;
-    }
-    
+    }   
 }

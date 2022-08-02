@@ -10,7 +10,7 @@ import recipient.Recipient;
 public class DatabaseReader {
     private static DatabaseReader databaseReader;
     private Scanner scanner;
-    private static final String filePath = "G:\\University\\Semester_02\\CS\\CS 1040\\Code Snippets\\Assessments\\4_EmailClient\\Code\\Email Client\\data\\clientList.txt";
+    private static final String filePath = ".\\data\\clientList.txt";
     
     private DatabaseReader(){
         try {

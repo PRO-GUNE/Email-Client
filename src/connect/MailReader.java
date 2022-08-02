@@ -10,7 +10,7 @@ public class MailReader {
     private static MailReader mailReader;
     private FileInputStream fileInputStream;
     private ObjectInputStream objectInputStream;
-    private static final String filePath = "G:\\University\\Semester_02\\CS\\CS 1040\\Code Snippets\\Assessments\\4_EmailClient\\Code\\Email Client\\data\\emailHistory.txt";
+    private static final String filePath = ".\\data\\emailHistory.ser";
 
 
     private MailReader(){
