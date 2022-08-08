@@ -32,15 +32,15 @@ public class Email_Client {
 
         // Create the scanner to get user input
         Scanner scanner = new Scanner(System.in);  
-
+        
+        // Check today's date and sent birthday greetings to the recipients
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        String date = formatter.format(new Date());
+        ArrayList<Greetable> bDayRecipientList = recipientFactory.getRecipientByDate(date);
+        mailService.sendGreeting(bDayRecipientList);
+        
         while(isRunning){
             
-            // Check today's date and sent birthday greetings to the recipients
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-            String date = formatter.format(new Date());
-            ArrayList<Greetable> bDayRecipientList = recipientFactory.getRecipientByDate(date);
-            mailService.sendGreeting(bDayRecipientList);
-    
             // Create an instance of Recipient
             Recipient recipient = null;
             
@@ -60,6 +60,7 @@ public class Email_Client {
                     String recipientString = scanner.nextLine();
                     // Create the recipient
                     recipient = recipientFactory.makeRecipient(recipientString);
+                    // Send a greeting if the recipient has a birthday today
                     break;
                 case 2:
                         // input format - email,subject,content
