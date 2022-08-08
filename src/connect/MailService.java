@@ -72,10 +72,10 @@ public class MailService{
         return mailService;
     }
 
-    public void sendGreeting(ArrayList<Recipient> recipients){
-        for(Recipient recipient : recipients){
-                Greetable greetable = (Greetable)recipient;
+    public void sendGreeting(ArrayList<Greetable> greetables){
+        for(Greetable greetable : greetables){
                 Email mail = greetable.greet();
+                Recipient recipient = (Recipient)greetable;
                 sendMail(recipient, mail.getSubject(), mail.getContent());
         }
     }

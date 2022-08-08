@@ -2,13 +2,16 @@ package recipient;
 
 import connect.Email;
 
-public class Official extends Recipient{
-    
+public class Official extends Recipient{    
+    private String title;
+
     public Official(String name, String email, String title) {
         super(name, email);
         this.title = title;
         this.type = "Official";
     }
+
+    public String getTitle() {    return title;}
     
     @Override
     public Email formatMail(String subject, String content){

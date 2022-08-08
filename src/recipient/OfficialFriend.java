@@ -3,6 +3,8 @@ package recipient;
 import connect.Email;
 
 public class OfficialFriend extends Official implements Greetable{
+    private String bDay;
+    private String title;
     
     public OfficialFriend(String name, String email, String title, String bDay) {
         super(name, email, title);
@@ -10,7 +12,11 @@ public class OfficialFriend extends Official implements Greetable{
         this.type = "Official_friend";
     }
 
-    
+    public String getTitle() {    return title;}
+
+    @Override
+    public String getbDay() {      return bDay;}
+
     @Override
     public Email formatMail(String subject, String content) {
         String sendContent = String.format("Dear %s,\n%s\n", this.title, content);

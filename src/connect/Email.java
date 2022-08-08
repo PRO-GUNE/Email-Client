@@ -41,6 +41,6 @@ public class Email implements Serializable{
     
     @Override
     public String toString(){
-        return String.format("Time:%s Subject:%s To:%s", timeStamp.toString(), subject, recipient);
+        return String.format("Time:%s Subject:%s To:%s", timeStamp.toString(), subject, recipient.toString());
     }
 }

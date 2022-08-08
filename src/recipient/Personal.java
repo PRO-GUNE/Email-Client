@@ -3,12 +3,20 @@ package recipient;
 import connect.Email;
 
 public class Personal extends Recipient implements Greetable{
+    private String nickName;    
+    private String bDay;
+
     public Personal(String name, String nickname, String email, String bDay) {
         super(name, email);
         this.nickName = nickname;
         this.bDay = bDay;
         this.type = "Personal";
     }
+
+    public String getNickName() {      return nickName;}
+
+    @Override
+    public String getbDay() {      return bDay;}
 
     @Override
     public Email greet() {

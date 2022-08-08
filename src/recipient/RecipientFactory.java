@@ -6,10 +6,13 @@ import connect.DatabaseReader;
 import connect.DatabaseWriter;
 
 public class RecipientFactory {
-    private ArrayList<Recipient> recipients;
     
+    private ArrayList<Recipient> recipients;    // Store all the recipients
+    private int numNewRecipients;               // Store the number of newly added recipients
+
     public RecipientFactory(){
         this.recipients = new ArrayList<Recipient>();
+        this.numNewRecipients = 0;
 
         // Create the file to store the recipients if it is not availble
         DatabaseWriter.createFileIfNotAvailable();
@@ -18,6 +21,7 @@ public class RecipientFactory {
     public Recipient makeRecipient(String recipientString){
         Recipient recipient = Recipient.parseRecipientFromString(recipientString);
         recipients.add(recipient);
+        numNewRecipients+=1;
         return recipient;
     }
 
@@ -30,15 +34,22 @@ public class RecipientFactory {
         return null;
     }
 
-    public ArrayList<Recipient> getRecipientByDate(String date){
+    public ArrayList<Greetable> getRecipientByDate(String date){
         // Only greetable recipients have birthdays
-        ArrayList<Recipient> bdayRecipients = new ArrayList<Recipient>();
+        ArrayList<Greetable> bdayRecipients = new ArrayList<Greetable>();
         
         for(Recipient recipient : recipients){
-            if(recipient instanceof Greetable && 
-                Greetable.isSameDates(recipient.getbDay(), date)){
-                    bdayRecipients.add(recipient);
+            if(recipient instanceof Greetable){
+                Greetable greetable=null;
+                if(recipient.getType().equals("Personal"))
+                    greetable = (Personal)recipient;
+                else if(recipient.getType().equals("Official_friend"))
+                    greetable = (OfficialFriend)recipient;
+
+                if(Greetable.isSameDates(greetable.getbDay(),date)){
+                    bdayRecipients.add(greetable);   
                 }
+            }
         }
         
         return bdayRecipients;
@@ -59,7 +70,7 @@ public class RecipientFactory {
     public void writeRecipients(){
         DatabaseWriter databaseWriter = DatabaseWriter.connectDBWriter();
         if(databaseWriter != null){
-            databaseWriter.writeRecipients(recipients);
+            databaseWriter.writeRecipients(recipients, numNewRecipients);
             databaseWriter.closeDBWriter();
         }
     }

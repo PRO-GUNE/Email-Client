@@ -14,9 +14,6 @@ import connect.Email;
 public abstract class Recipient{
     protected String name;
     protected String email;
-    protected String title;
-    protected String nickName;    
-    protected String bDay;
     protected String type;
     
     public static int recipientCount;
@@ -27,9 +24,6 @@ public abstract class Recipient{
       recipientCount++;
     }
     
-    public String getTitle() {    return title;}
-    public String getNickName() {      return nickName;}
-    public String getbDay() {      return bDay;}
     public String getMail(){   return email;}
     public String getName(){   return name; } 
     public String getType(){   return type; }
@@ -40,8 +34,10 @@ public abstract class Recipient{
     
     public static Recipient parseRecipientFromString(String recipientString){
       String[] data = recipientString.split(":");
+      data[1].replaceAll(" ", "");      // Remove whitespace from the arguments
       String[] args = data[1].split(",");
       String type = data[0];
+
 
       // Create the recipient
       Recipient recipient = null;

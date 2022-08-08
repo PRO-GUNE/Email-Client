@@ -14,9 +14,9 @@ public class DatabaseWriter {
     
     private DatabaseWriter(){
         try {
-            this.fileWriter = new FileWriter(filePath);
+            this.fileWriter = new FileWriter(filePath, true);
         } catch (IOException e){
-            System.err.println("Error : Could not open the file");
+            System.err.println("Error : Could not open the file to append");
             e.printStackTrace();
         }
     }
@@ -39,10 +39,13 @@ public class DatabaseWriter {
 
     }
 
-    public void writeRecipients(ArrayList<Recipient> recipients){
-        for(Recipient rec : recipients){
+    public void writeRecipients(ArrayList<Recipient> recipients, int numNewRecipients){
+        // Write the newly added recipients to the file
+        int totalRecipients = recipients.size();
+
+        for(int i=totalRecipients-numNewRecipients; i<totalRecipients; i++){
             try {
-                fileWriter.write(rec.toString());
+                fileWriter.write(recipients.get(i).toString());
             } catch (IOException e) {
                 System.err.println("Error : Could not write to the file");
                 e.printStackTrace();

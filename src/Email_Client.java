@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import connect.Email;
 import connect.MailService;
+import recipient.Greetable;
 import recipient.Recipient;
 import recipient.RecipientFactory;
 
@@ -37,7 +38,7 @@ public class Email_Client {
             // Check today's date and sent birthday greetings to the recipients
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
             String date = formatter.format(new Date());
-            ArrayList<Recipient> bDayRecipientList = recipientFactory.getRecipientByDate(date);
+            ArrayList<Greetable> bDayRecipientList = recipientFactory.getRecipientByDate(date);
             mailService.sendGreeting(bDayRecipientList);
     
             // Create an instance of Recipient
@@ -69,15 +70,20 @@ public class Email_Client {
     
                         // code to send an email
                         recipient = recipientFactory.getRecipientByEmail(email);
-                        mailService.sendMail(recipient, subjectString, contentString);
+                        // Send the mail if the client exists
+                        if(recipient!=null)
+                            mailService.sendMail(recipient, subjectString, contentString);
+                        else
+                            System.err.println("Error : No client with that email address.");
                         break;
                 case 3:
                     // input format - yyyy/MM/dd (ex: 2018/09/17)
                     date = scanner.nextLine();
                     
                     // code to print recipients who have birthdays on the given date
-                    ArrayList<Recipient> bDayRecipients = recipientFactory.getRecipientByDate(date);
-                    for(Recipient rec : bDayRecipients){
+                    ArrayList<Greetable> bDayRecipients = recipientFactory.getRecipientByDate(date);
+                    for(Greetable greetable : bDayRecipients){
+                        Recipient rec = (Recipient) greetable;
                         System.out.println(rec.toString());
                     } 
                     break;
