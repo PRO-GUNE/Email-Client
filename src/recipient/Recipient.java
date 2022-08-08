@@ -34,7 +34,7 @@ public abstract class Recipient{
     
     public static Recipient parseRecipientFromString(String recipientString){
       String[] data = recipientString.split(":");
-      data[1].replaceAll(" ", "");      // Remove whitespace from the arguments
+      data[1] = data[1].replaceAll(" ", "");      // Remove whitespace from the arguments
       String[] args = data[1].split(",");
       String type = data[0];
 
