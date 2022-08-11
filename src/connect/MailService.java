@@ -96,8 +96,10 @@ public class MailService{
             );
             message.setSubject(subject);
             message.setText(content);
-            // Send the message
-            Transport.send(message);
+
+            // Send the message asynchronously
+            Thread sender = new Thread(new AsyncTransport(message), "sender");
+            sender.start();
 
             // Add the mail to the sent mail list
             sentMails.add(mail);
@@ -169,4 +171,23 @@ class User {
     public String getName() {
         return name;
     }   
+}
+
+class AsyncTransport implements Runnable{
+    private Message message;
+
+    public AsyncTransport(Message message){
+        this.message = message;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Transport.send(this.message);
+        } catch (MessagingException e) {
+            System.err.println("Error : Could not send email");
+            e.printStackTrace();
+        }   
+    }
+
 }
