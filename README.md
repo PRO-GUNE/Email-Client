@@ -49,7 +49,6 @@ Run the `Email_Client.java` file and this will open the CLI interface. The avail
 - Use threads to make the process of sending emails non-blocking
 ## 🧪 Versions
 - **v1.0** - This version is a CLI tool only meeting the minimum user requirements specified by the user.
-- **v1.1** - This version will have a GUI to interact with the application
 
 ## 👨‍💻 Contributions
 Chathura Gunasekara @PRO-GUNE
