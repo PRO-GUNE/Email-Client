@@ -1,5 +1,8 @@
 package recipient;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import connect.Email;
 
 /**
@@ -15,8 +18,9 @@ public abstract class Recipient{
     protected String name;
     protected String email;
     protected String type;
-    
-    public static int recipientCount;
+
+    public static int recipientCount=0;
+    private static Set<String> emailHash=new HashSet<String>();
     
     public Recipient(String name, String email){
       this.name = name;
@@ -38,16 +42,21 @@ public abstract class Recipient{
       String[] args = data[1].split(",");
       String type = data[0];
 
-
-      // Create the recipient
+      // Create the recipient if the user is unique
       Recipient recipient = null;
-        if(type.equalsIgnoreCase("Official"))
-            recipient = new Official(args[0], args[1], args[2]);
-        else if(type.equalsIgnoreCase("Official_friend"))
-            recipient = new OfficialFriend(args[0], args[1], args[2], args[3]);
-        else if(type.equalsIgnoreCase("Personal"))
-            recipient = new Personal(args[0], args[1], args[2], args[3]);
-        
-        return recipient;
+      if(type.equalsIgnoreCase("Official") && !emailHash.contains(args[1])){
+        emailHash.add(args[1]);
+        recipient = new Official(args[0], args[1], args[2]);
+      }
+      else if(type.equalsIgnoreCase("Official_friend") && !emailHash.contains(args[1])){
+        emailHash.add(args[1]);
+        recipient = new OfficialFriend(args[0], args[1], args[2], args[3]);
+      }
+      else if(type.equalsIgnoreCase("Personal")){
+        emailHash.add(args[2]);
+        recipient = new Personal(args[0], args[1], args[2], args[3]);
+      }
+      
+      return recipient;
   }
 }

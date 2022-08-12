@@ -1,6 +1,4 @@
 Official: Chathura,cmggun456@gmail.com,CEO
-Personal: Kamal,KM,cmggun456@gmail.com,2000/09/08
-Official: nimal,cmggun567@gmail.com,ceo
 Personal: sunil,suna,sunil@gmail.com,2000/10/10
 Personal: nilantha,nila,cmggun567@gmail.com,2000/08/12
-Personal: sunil,<nick-name>,sunil@gmail.com,2000/10/10
+Personal: sunil,sunila,sunila@gmail.com,2000/10/10

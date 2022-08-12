@@ -14,7 +14,7 @@ import recipient.Recipient;
 public class MailService{
     // This is a singleton object that connects to the Email Service
     private static MailService mailService;
-    private User user;
+    private MailUser user;
     private String email;
     private String password;
     private Session session;
@@ -38,7 +38,7 @@ public class MailService{
             String password = userProp.getProperty("user.password");
 
             // Create the user object
-            this.user = new User(name, email, password);
+            this.user = new MailUser(name, email, password);
 
         } catch (IOException e) {
     
@@ -148,13 +148,14 @@ public class MailService{
     }
 }
 
-class User {
+// Class to represent the person sending the mail
+class MailUser {
     private String email;
     private String password;
     private String name;
     
     
-    public User(String name, String email, String password) {
+    public MailUser(String name, String email, String password) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -173,6 +174,7 @@ class User {
     }   
 }
 
+// Class to implement concurrency when sending the mail
 class AsyncTransport implements Runnable{
     private Message message;
 

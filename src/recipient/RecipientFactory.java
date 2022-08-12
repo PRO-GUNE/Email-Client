@@ -20,8 +20,14 @@ public class RecipientFactory {
 
     public Recipient makeRecipient(String recipientString){
         Recipient recipient = Recipient.parseRecipientFromString(recipientString);
-        recipients.add(recipient);
-        numNewRecipients+=1;
+
+        if(recipient!=null){
+            recipients.add(recipient);
+            numNewRecipients+=1;
+        }
+        else
+            System.out.println("User already exists");
+
         return recipient;
     }
 
