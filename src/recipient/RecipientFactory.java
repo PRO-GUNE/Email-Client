@@ -62,7 +62,7 @@ public class RecipientFactory {
     }
 
     public int getNumRecipients(){
-        return recipients.size();
+        return Recipient.recipientCount;
     }
 
     public void loadRecipients(){
