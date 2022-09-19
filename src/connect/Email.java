@@ -12,6 +12,8 @@ public class Email implements Serializable{
     private String subject;
     private String content;
     private String recipient;
+    private String email;
+    
     private static final long serialversionUID = 129348938L;
     
     
@@ -21,6 +23,16 @@ public class Email implements Serializable{
         this.subject = subject;
         this.content = content;
         this.recipient = recipient.toString();
+        this.email = recipient.getMail();
+    }
+    
+    public Email(String subject, String content, String email){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        this.timeStamp = formatter.format(new Date());
+        this.subject = subject;
+        this.content = content;
+        this.recipient = email;
+        this.email = email;
     }
     
     public String parseToString(){
@@ -34,6 +46,7 @@ public class Email implements Serializable{
         return null;
     }
     
+    public String getEmail() {  return email;}
     public String getRecipient() { return recipient;}
     public String getContent() { return content;}
     public String getSubject() { return subject;}

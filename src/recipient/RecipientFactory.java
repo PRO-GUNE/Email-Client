@@ -6,7 +6,6 @@ import connect.DatabaseReader;
 import connect.DatabaseWriter;
 
 public class RecipientFactory {
-    
     private ArrayList<Recipient> recipients;    // Store all the recipients
     private int numNewRecipients;               // Store the number of newly added recipients
 
@@ -72,10 +71,15 @@ public class RecipientFactory {
     }
     
     public void writeRecipients(){
+
+        // write the new recipients
         DatabaseWriter databaseWriter = DatabaseWriter.connectDBWriter();
         if(databaseWriter != null){
             databaseWriter.writeRecipients(recipients, numNewRecipients);
             databaseWriter.closeDBWriter();
+
+            // clear the new recipients
+            numNewRecipients = 0;
         }
     }
 

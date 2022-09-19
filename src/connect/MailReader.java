@@ -23,7 +23,7 @@ public class MailReader {
         } 
         catch (IOException e) {
             System.err.println("Error : Could not connect to the logger file");
-            e.printStackTrace();
+            
         }
     }
 
@@ -45,7 +45,7 @@ public class MailReader {
             mailReader = null;
         } catch (IOException e) {
             System.err.println("Error : Could not disconnect the log file");
-            e.printStackTrace();
+            
         }
     }
 
@@ -60,10 +60,10 @@ public class MailReader {
                 
         } catch (ClassNotFoundException e) {
             System.err.println("Error : Could not find the class Email");
-            e.printStackTrace();
+            
         } catch (IOException e) {
             System.err.println("Error : Could not read from the log file");
-            e.printStackTrace();
+            
         }
         return emails;
     }

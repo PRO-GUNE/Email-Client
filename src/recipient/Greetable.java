@@ -11,4 +11,3 @@ public interface Greetable {
                     equalsIgnoreCase(date2.substring(5, date1.length())));
     };
 }
-

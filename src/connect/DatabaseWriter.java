@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import recipient.Recipient;
 
 public class DatabaseWriter {
+    
     private static DatabaseWriter databaseWriter;
     private FileWriter fileWriter;
     private static final String filePath = ".\\data\\clientList.txt";

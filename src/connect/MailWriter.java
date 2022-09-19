@@ -20,7 +20,7 @@ public class MailWriter {
             this.objectOutputStream = new ObjectOutputStream(this.fileOutputStream);
         } catch (IOException e) {
             System.err.println("Error : Could not create connection with the log file");
-            e.printStackTrace();
+            
         }
     }
 
@@ -38,7 +38,7 @@ public class MailWriter {
             mailWriter = null;
         } catch (IOException e) {
             System.err.println("Error : Could not disconnect the log file");
-            e.printStackTrace();
+            
         }
     }
 
@@ -47,7 +47,7 @@ public class MailWriter {
             this.objectOutputStream.writeObject(emails);
         } catch (IOException e) {
             System.err.println("Error : Could not write send mail to mail history");
-            e.printStackTrace();
+            
         }
 
     }
@@ -59,7 +59,7 @@ public class MailWriter {
                 file.createNewFile();
             } catch (IOException e) {
                 System.err.println("Error : Could not create the emailHistory.ser file");
-                e.printStackTrace();
+                
             }
         }
     }
