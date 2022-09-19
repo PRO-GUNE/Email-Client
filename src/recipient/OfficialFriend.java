@@ -4,12 +4,11 @@ import connect.Email;
 
 public class OfficialFriend extends Official implements Greetable{
     private String bDay;
-    private String title;
     
     public OfficialFriend(String name, String email, String title, String bDay) {
         super(name, email, title);
         this.bDay = bDay;
-        this.type = "Official_friend";
+        this.type = "Office_friend";
     }
 
     public String getTitle() {    return title;}

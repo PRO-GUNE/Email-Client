@@ -17,7 +17,7 @@ public class DatabaseWriter {
             this.fileWriter = new FileWriter(filePath, true);
         } catch (IOException e){
             System.err.println("Error : Could not open the file to append");
-            e.printStackTrace();
+            
         }
     }
 
@@ -34,7 +34,7 @@ public class DatabaseWriter {
             databaseWriter = null;
         } catch (IOException e) {
             System.err.println("Error : Could not close the file");
-            e.printStackTrace();
+            
         }
 
     }
@@ -48,7 +48,7 @@ public class DatabaseWriter {
                 fileWriter.write(recipients.get(i).toString());
             } catch (IOException e) {
                 System.err.println("Error : Could not write to the file");
-                e.printStackTrace();
+                
             }
         }
     }
@@ -60,7 +60,7 @@ public class DatabaseWriter {
                 file.createNewFile();
             } catch (IOException e) {
                 System.err.println("Error : Could not create the clientList.txt file");
-                e.printStackTrace();
+                
             }
         }
     }

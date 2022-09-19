@@ -25,8 +25,6 @@ public class RecipientFactory {
             recipients.add(recipient);
             numNewRecipients+=1;
         }
-        else
-            System.out.println("User already exists");
 
         return recipient;
     }
@@ -49,7 +47,7 @@ public class RecipientFactory {
                 Greetable greetable=null;
                 if(recipient.getType().equals("Personal"))
                     greetable = (Personal)recipient;
-                else if(recipient.getType().equals("Official_friend"))
+                else if(recipient.getType().equals("Office_friend"))
                     greetable = (OfficialFriend)recipient;
 
                 if(Greetable.isSameDates(greetable.getbDay(),date)){

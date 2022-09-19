@@ -1,4 +1,4 @@
-Official: Chathura,cmggun456@gmail.com,CEO
-Personal: sunil,suna,sunil@gmail.com,2000/10/10
-Personal: nilantha,nila,cmggun567@gmail.com,2000/08/12
-Personal: sunil,sunila,sunila@gmail.com,2000/10/10
+Office_friend: kamal,cmggun567@gmail.com,clerk,2000/08/14
+Personal: sunil,<nick-name>,cmggun456@gmail.com,2000/08/14
+Office_friend: kamal,kamal@gmail.com,clerk,2000/12/12
+Official: nimal,nimal@gmail.com,ceo

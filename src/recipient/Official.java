@@ -3,7 +3,7 @@ package recipient;
 import connect.Email;
 
 public class Official extends Recipient{    
-    private String title;
+    protected String title;
 
     public Official(String name, String email, String title) {
         super(name, email);

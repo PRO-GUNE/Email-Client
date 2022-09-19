@@ -17,7 +17,7 @@ public class DatabaseReader {
             this.scanner = new Scanner(new File(filePath));
         } catch (FileNotFoundException e) {
             System.err.println("Error : Could not open the file");
-            e.printStackTrace();
+            
         }
     }
 

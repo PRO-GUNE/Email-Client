@@ -57,27 +57,39 @@ public class Email_Client {
             
             switch(option){
                 case 1:
+                    // prompt
+                    System.out.println("Enter details to add recipient as follows \n"
+                    + "Official: <name>,<email>,<title> \n"
+                    + "Office_friend: <name>,<email>,<title>,<birthday> \n"
+                    + "Personal: <name>,<nick-name>,<email>,<birthday>");
+
                     String recipientString = scanner.nextLine();
                     // Create the recipient
                     recipient = recipientFactory.makeRecipient(recipientString);
                     // Send a greeting if the recipient has a birthday today
                     break;
                 case 2:
-                        // input format - email,subject,content
-                        String[] emailString = scanner.nextLine().split(",", 3);
-                        String email = emailString[0];
-                        String subjectString = emailString[1];
-                        String contentString = emailString[2];
-    
-                        // code to send an email
-                        recipient = recipientFactory.getRecipientByEmail(email);
-                        // Send the mail if the client exists
-                        if(recipient!=null)
-                            mailService.sendMail(recipient, subjectString, contentString);
-                        else
-                            System.err.println("Error : No client with that email address.");
-                        break;
+                    // prompt
+                    System.out.println("Enter <email>,<subject>,<content>");
+
+                    // input format - email,subject,content
+                    String[] emailString = scanner.nextLine().split(",", 3);
+                    String email = emailString[0];
+                    String subjectString = emailString[1];
+                    String contentString = emailString[2];
+
+                    // code to send an email
+                    recipient = recipientFactory.getRecipientByEmail(email);
+                    // Send the mail if the client exists
+                    if(recipient!=null)
+                        mailService.sendMail(recipient, subjectString, contentString);
+                    else
+                        System.err.println("Error : No client with that email address.");
+                    break;
                 case 3:
+                    // prompt
+                    System.out.println("Enter <date>");
+
                     // input format - yyyy/MM/dd (ex: 2018/09/17)
                     date = scanner.nextLine();
                     
@@ -89,6 +101,9 @@ public class Email_Client {
                     } 
                     break;
                 case 4:
+                    // prompt
+                    System.out.println("Enter <date>");
+
                     // input format - yyyy/MM/dd (ex: 2018/09/17)
                     String searchDate = scanner.nextLine();
                     // Get the filtered mail
@@ -99,7 +114,7 @@ public class Email_Client {
                     break;
                 case 5:
                     // code to print the number of recipient objects in the application
-                    System.out.println(recipientFactory.getNumRecipients());
+                    System.out.println("Number of recipient objects: " + recipientFactory.getNumRecipients());
                     break;
                 
                 default:
